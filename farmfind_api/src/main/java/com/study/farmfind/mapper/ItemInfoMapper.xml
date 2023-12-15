@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="com.study.farmfind.mapper.ItemInfoMapper">
+
+	<!-- 개수조회 -->
+	<select id="itemInfoCount" parameterType="com.study.farmfind.model.Paging" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM 
+			ITEM_INFO
+		<where>
+			1=1
+			<if test="keyword != null and !keyword.equals('')">
+				AND ITEM_NM LIKE concat('%', #{keyword}, '%')
+			</if>
+			<if test="category != null and !category.equals('')">
+				AND ITEM_MID_CATEGORY_CD = #{category}
+			</if>
+			<if test="dyeYN != null and !dyeYN.equals('')">
+				AND ITEM_DYE_YN = #{dyeYN}
+			</if>
+			<if test="getFrom != null and !getFrom.equals('')">
+				AND ITEM_GET_FROM_CD = #{getFrom}
+			</if>
+
+		</where>
+			;	
+	</select>
+	
+	<!-- 아이템이름 조회 -->
+	<!-- Paging 객체에 있는 변수를 사용하기위해 parameterType 추가 -->
+	<select id="getItemTitle" parameterType="com.study.farmfind.model.Paging" resultType="com.study.farmfind.model.ItemInfoDto">
+				
+		SELECT 
+			ITEM_NO,
+			ITEM_NM, 
+			ITEM_IMG_AFT,
+			ITEM_GET_FROM_DT
+		FROM 
+			ITEM_INFO 
+		<where> 
+			1=1
+			<if test="keyword != null and !keyword.equals('')">
+            	AND ITEM_NM like concat('%', #{keyword}, '%')
+            </if>
+            <if test="category != null and !category.equals('')">
+				AND ITEM_MID_CATEGORY_CD = #{category}
+			</if>
+			<if test="dyeYN != null and !dyeYN.equals('')">
+				AND ITEM_DYE_YN = #{dyeYN}
+			</if>
+			<if test="getFrom != null and !getFrom.equals('')">
+				AND ITEM_GET_FROM_CD = #{getFrom}
+			</if>
+				
+		</where>		
+			LIMIT #{pagination.limitStart}, #{recordSize};	
+			
+		
+	</select>
+	
+	<!-- 아이템정보 조회 param = itemNo -->
+	<select id="getItemInfo" resultType="com.study.farmfind.model.ItemInfoDto">
+		SELECT
+			ITEM_NO,
+			ITEM_MAIN_CATEGORY_CD,
+			ITEM_MID_CATEGORY_CD,
+			ITEM_NM,
+			ITEM_SIZE,
+			ITEM_DYE_YN,
+			ITEM_GET_FROM_CD,
+			ITEM_GET_FROM_NM,
+			ITEM_GET_FROM_DT,
+			ITEM_IMG_AFT,
+			ITEM_IMG_NIG,
+			ITEM_DSCPTION
+		FROM
+			ITEM_INFO
+		WHERE ITEM_NO = #{itemNo};			
+	</select>
+	
+
+</mapper>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="com.study.farmfind.mapper.HousingInfoMapper">
+
+	<!-- 개수조회 -->
+	<select id="housingInfoCount" parameterType="com.study.farmfind.model.Paging" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM 
+			HOUSING_INFO
+		<where>
+			1=1
+			<if test="keyword != null and !keyword.equals('')">
+				AND HOUSING_NM LIKE concat('%', #{keyword}, '%')
+			</if>
+			<if test="dyeYN != null and !dyeYN.equals('')">
+				AND HOUSING_DYE_YN = #{dyeYN}
+			</if>
+			<if test="getFrom != null and !getFrom.equals('')">
+				AND HOUSING_GET_FROM_CD = #{getFrom}
+			</if>
+
+		</where>
+			;	
+	</select>
+	
+	<!-- 아이템이름 조회 -->
+	<!-- Paging 객체에 있는 변수를 사용하기위해 parameterType 추가 -->
+	<select id="getHousingTitle" parameterType="com.study.farmfind.model.Paging" resultType="com.study.farmfind.model.HousingInfoDto">
+				
+		SELECT 
+			HOUSING_NO,
+			HOUSING_NM, 
+			HOUSING_IMG_AFT,
+			HOUSING_GET_FROM_DT
+		FROM 
+			HOUSING_INFO 
+		<where> 
+			1=1
+			<if test="keyword != null and !keyword.equals('')">
+            	AND HOUSING_NM like concat('%', #{keyword}, '%')
+            </if>
+			<if test="dyeYN != null and !dyeYN.equals('')">
+				AND HOUSING_DYE_YN = #{dyeYN}
+			</if>
+			<if test="getFrom != null and !getFrom.equals('')">
+				AND HOUSING_GET_FROM_CD = #{getFrom}
+			</if>
+				
+		</where>		
+			LIMIT #{pagination.limitStart}, #{recordSize};	
+			
+		
+	</select>
+	
+	<!-- 아이템정보 조회 param = housingNo -->
+	<select id="getHousingInfo" resultType="com.study.farmfind.model.HousingInfoDto">
+		SELECT
+			HOUSING_NO,
+			HOUSING_NM,
+			HOUSING_SIZE,
+			HOUSING_DYE_YN,
+			HOUSING_GET_FROM_CD,
+			HOUSING_GET_FROM_NM,
+			HOUSING_GET_FROM_DT,
+			HOUSING_IMG_AFT,
+			HOUSING_IMG_NIG,
+			HOUSING_DSCPTION
+		FROM
+			HOUSING_INFO
+		WHERE HOUSING_NO = #{housingNo};			
+	</select>
+	
+
+</mapper>
