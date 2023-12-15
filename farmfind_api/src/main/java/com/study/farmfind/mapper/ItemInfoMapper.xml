@@ -7,26 +7,62 @@
 
 	<!-- 개수조회 -->
 	<select id="itemInfoCount" parameterType="com.study.farmfind.model.Paging" resultType="int">
-		SELECT COUNT(*) FROM ITEM_INFO;	
+		SELECT 
+			COUNT(*) 
+		FROM 
+			ITEM_INFO
+		<where>
+			1=1
+			<if test="keyword != null and !keyword.equals('')">
+				AND ITEM_NM LIKE concat('%', #{keyword}, '%')
+			</if>
+			<if test="category != null and !category.equals('')">
+				AND ITEM_MID_CATEGORY_CD = #{category}
+			</if>
+			<if test="dyeYN != null and !dyeYN.equals('')">
+				AND ITEM_DYE_YN = #{dyeYN}
+			</if>
+			<if test="getFrom != null and !getFrom.equals('')">
+				AND ITEM_GET_FROM_CD = #{getFrom}
+			</if>
+
+		</where>
+			;	
 	</select>
 	
 	<!-- 아이템이름 조회 -->
 	<!-- Paging 객체에 있는 변수를 사용하기위해 parameterType 추가 -->
 	<select id="getItemTitle" parameterType="com.study.farmfind.model.Paging" resultType="com.study.farmfind.model.ItemInfoDto">
-		
-		<![CDATA[
+				
 		SELECT 
+			ITEM_NO,
 			ITEM_NM, 
-			ITEM_IMG_AFT
+			ITEM_IMG_AFT,
+			ITEM_GET_FROM_DT
 		FROM 
-
-		ITEM_INFO 
+			ITEM_INFO 
+		<where> 
+			1=1
+			<if test="keyword != null and !keyword.equals('')">
+            	AND ITEM_NM like concat('%', #{keyword}, '%')
+            </if>
+            <if test="category != null and !category.equals('')">
+				AND ITEM_MID_CATEGORY_CD = #{category}
+			</if>
+			<if test="dyeYN != null and !dyeYN.equals('')">
+				AND ITEM_DYE_YN = #{dyeYN}
+			</if>
+			<if test="getFrom != null and !getFrom.equals('')">
+				AND ITEM_GET_FROM_CD = #{getFrom}
+			</if>
+				
+		</where>		
 			LIMIT #{pagination.limitStart}, #{recordSize};	
 			
-		]]>
+		
 	</select>
 	
-	<!-- 아이템정보 조회 param = item_no -->
+	<!-- 아이템정보 조회 param = itemNo -->
 	<select id="getItemInfo" resultType="com.study.farmfind.model.ItemInfoDto">
 		SELECT
 			ITEM_NO,
@@ -43,7 +79,7 @@
 			ITEM_DSCPTION
 		FROM
 			ITEM_INFO
-		WHERE ITEM_NO = #{item_no};			
+		WHERE ITEM_NO = #{itemNo};			
 	</select>
 	
 

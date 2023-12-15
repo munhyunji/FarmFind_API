@@ -6,29 +6,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.study.farmfind.mapper.ItemInfoMapper;
+import com.study.farmfind.mapper.HousingInfoMapper;
+import com.study.farmfind.model.HousingInfoDto;
 import com.study.farmfind.model.ItemInfoDto;
 import com.study.farmfind.model.Pagination;
 import com.study.farmfind.model.Paging;
 import com.study.farmfind.model.PagingResponse;
 
 @Service
-public class ItemInfoService {
-	
+public class HousingInfoService {
+
 	@Autowired
-	private ItemInfoMapper mapper;
+	private HousingInfoMapper mapper;
 	
-	//개수조회
-	/*
-	 * public int itemInfoCount() throws Exception { return mapper.itemInfoCount();
-	 * }
-	 */
-	
-	//이름조회
-	public PagingResponse<ItemInfoDto> getItemTitle(Paging page) throws Exception {
-		
+	public PagingResponse<HousingInfoDto> getHousingTitle(Paging page) throws Exception {
+
 		// 데이터가 없는 경우 null 반환
-		int total = mapper.itemInfoCount(page);
+		int total = mapper.housingInfoCount(page);
 		if(total < 1) {
 			return new PagingResponse<>(Collections.emptyList(), null );
 		}
@@ -37,17 +31,14 @@ public class ItemInfoService {
 		Pagination pagination = new Pagination(total, page);
 		page.setPagination(pagination);
 		
-		List<ItemInfoDto> list = mapper.getItemTitle(page);
+		List<HousingInfoDto> list = mapper.getHousingTitle(page);
 				
 		return new PagingResponse<>(list, pagination);
-	} 
-	
-	//상세조회
-	public ItemInfoDto getItemInfo(int item_no) throws Exception {
-		return mapper.getItemInfo(item_no);
 	}
 	
-	
-	
-	
+	//아이템 상세정보
+	public HousingInfoDto getHousingInfo(int housingNo) throws Exception {
+		return mapper.getHousingInfo(housingNo);
+	}
+
 }

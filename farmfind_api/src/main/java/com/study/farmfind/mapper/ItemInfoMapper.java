@@ -11,7 +11,7 @@ import com.study.farmfind.model.Paging;
 public interface ItemInfoMapper {
 	
 	//아이템 개수 조회
-	int itemInfoCount() throws Exception;
+	int itemInfoCount(Paging page) throws Exception;
 	//아이템 타이틀 조회
 	List<ItemInfoDto> getItemTitle(Paging page) throws Exception;
 	//아이템 상세정보 조회

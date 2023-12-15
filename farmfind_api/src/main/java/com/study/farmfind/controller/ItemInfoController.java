@@ -40,10 +40,22 @@ public class ItemInfoController {
 	
 	// 리스트 타이틀 조회
 	@GetMapping("/list")
-	public PagingResponse<ItemInfoDto> itemInfoTitle(@RequestParam(value="page", defaultValue="1") int currentPage) throws Exception {		
+	public PagingResponse<ItemInfoDto> itemInfoTitle(
+			@RequestParam(value="page", defaultValue="1") int currentPage,
+			@RequestParam(value="keyword", defaultValue="") String keyword,
+			@RequestParam(value="category", defaultValue="") String category,
+			@RequestParam(value="dyeYN", defaultValue="") String dyeYN,
+			@RequestParam(value="getFrom", defaultValue="") String getFrom,
+			@RequestParam(value="itemSize", defaultValue="") String itemSize
+			) throws Exception {		
 		
 		Paging paging = new Paging();
 		paging.setPage(currentPage);
+		paging.setKeyword(keyword);
+		paging.setCategory(category);
+		paging.setDyeYN(dyeYN);
+		paging.setGetFrom(getFrom);
+		paging.setItemSize(itemSize);
 		
 		PagingResponse<ItemInfoDto> response = service.getItemTitle(paging);
 		
@@ -53,17 +65,13 @@ public class ItemInfoController {
 	
 	// 상세정보 조회
 	// PathVariable = url로부터 파라미터를 받음
-	@GetMapping("/detail/{item_no}")
-	public ItemInfoDto itemInfo(HttpServletRequest request, @PathVariable int item_no) throws Exception {		
-		
-		log.info("itemInfo 메서드 : [{}] ", request.toString());
-		
-		return service.getItemInfo(item_no);		
+	@GetMapping("/detail")
+	public ItemInfoDto itemInfo(@RequestParam(value="itemNo") int itemNo) throws Exception {		
+		return service.getItemInfo(itemNo);		
 	} 
 	
 	// 정보 추가
-	// 정보 수정
-	
+	// 정보 수정	
 	// 정보 삭제
 	
 	
