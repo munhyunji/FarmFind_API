@@ -49,7 +49,7 @@ public class HousingInfoController {
 		// 상세정보 조회
 		// PathVariable = url로부터 파라미터를 받음
 		@GetMapping("/detail")
-		public HousingInfoDto housingInfo(@RequestParam(value="no") int housingNo) throws Exception {		
+		public HousingInfoDto housingInfo(@RequestParam(value="housingNo") int housingNo) throws Exception {		
 			return service.getHousingInfo(housingNo);		
 		} 
 }

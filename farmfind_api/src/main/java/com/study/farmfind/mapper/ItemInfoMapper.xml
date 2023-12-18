@@ -10,7 +10,7 @@
 		SELECT 
 			COUNT(*) 
 		FROM 
-			ITEM_INFO
+			item_info
 		<where>
 			1=1
 			<if test="keyword != null and !keyword.equals('')">
@@ -40,7 +40,7 @@
 			ITEM_IMG_AFT,
 			ITEM_GET_FROM_DT
 		FROM 
-			ITEM_INFO 
+			item_info 
 		<where> 
 			1=1
 			<if test="keyword != null and !keyword.equals('')">
@@ -78,7 +78,7 @@
 			ITEM_IMG_NIG,
 			ITEM_DSCPTION
 		FROM
-			ITEM_INFO
+			item_info
 		WHERE ITEM_NO = #{itemNo};			
 	</select>
 	
