@@ -10,7 +10,7 @@
 		SELECT 
 			COUNT(*) 
 		FROM 
-			HOUSING_INFO
+			housing_info
 		<where>
 			1=1
 			<if test="keyword != null and !keyword.equals('')">
@@ -37,7 +37,7 @@
 			HOUSING_IMG_AFT,
 			HOUSING_GET_FROM_DT
 		FROM 
-			HOUSING_INFO 
+			housing_info 
 		<where> 
 			1=1
 			<if test="keyword != null and !keyword.equals('')">
@@ -63,6 +63,7 @@
 			HOUSING_NM,
 			HOUSING_SIZE,
 			HOUSING_DYE_YN,
+			HOUSING_DYE_PART,
 			HOUSING_GET_FROM_CD,
 			HOUSING_GET_FROM_NM,
 			HOUSING_GET_FROM_DT,
@@ -70,7 +71,7 @@
 			HOUSING_IMG_NIG,
 			HOUSING_DSCPTION
 		FROM
-			HOUSING_INFO
+			housing_info
 		WHERE HOUSING_NO = #{housingNo};			
 	</select>
 	
