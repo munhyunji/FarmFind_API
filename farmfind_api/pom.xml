@@ -81,15 +81,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<resources>
-	        <resource>
-	            <directory>src/main/java</directory>
-	            <includes>
-	                <include>**/*.xml</include>
-	            </includes>
-	        </resource>
-	        <!-- 다른 리소스 디렉토리들을 추가할 수 있습니다. -->
-	    </resources>
 	</build>
 
 </project>
