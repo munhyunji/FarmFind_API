@@ -34,11 +34,17 @@ public class HousingInfoController {
 		@GetMapping("/list")
 		public PagingResponse<HousingInfoDto> housingInfoTitle(
 				@RequestParam(value="page", defaultValue="1") int currentPage,
-				@RequestParam(value="keyword", defaultValue="") String keyword) throws Exception {		
+				@RequestParam(value="keyword", defaultValue="") String keyword,
+				@RequestParam(value="dyeYN", defaultValue="") String dyeYN,
+				@RequestParam(value="getFrom", defaultValue="") String getFrom
+			
+				) throws Exception {		
 			
 			Paging paging = new Paging();
 			paging.setPage(currentPage);
 			paging.setKeyword(keyword);
+			paging.setDyeYN(dyeYN);
+			paging.setGetFrom(getFrom);
 			
 			PagingResponse<HousingInfoDto> response = service.getHousingTitle(paging);
 			

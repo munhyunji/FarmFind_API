@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="com.study.farmfind.mapper.VisitorMapper">
+
+	<!-- 오늘 방문자 insert -->
+	<insert id="setVisitTodayCount" parameterType="String">
+		INSERT INTO
+			visitor (VISITOR_ID, VISITOR_TIME)
+			VALUES (
+				#{sessionId},
+				now()
+			)	
+	</insert>
+	<!-- 오늘방문자 total 값 -->
+	<select id="getVisitTodayTotalCount" resultType="int">
+		SELECT COUNT(VISITOR_ID)
+		FROM visitor
+		WHERE DATE(VISITOR_TIME) = CURDATE();
+	</select>
+	
+	<!-- 오늘 방문여부 체크 -->
+	<select id="getVisitorIdToday" parameterType="String" resultType="int">
+		SELECT COUNT(VISITOR_ID)
+		FROM visitor
+		WHERE VISITOR_ID = #{sessionId}
+	</select>
+	
+	
+</mapper>
