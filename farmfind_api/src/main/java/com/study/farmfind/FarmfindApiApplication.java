@@ -25,9 +25,7 @@ public class FarmfindApiApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:8070");
-                registry.addMapping("/**").allowedOrigins("http://3.35.93.254:8080");
-                registry.addMapping("/**").allowedOrigins("https://3.35.93.254:8080");
+                registry.addMapping("/**").allowedOrigins("http://localhost:8070", "http://3.35.93.254:8080");
             }
         };
     }
