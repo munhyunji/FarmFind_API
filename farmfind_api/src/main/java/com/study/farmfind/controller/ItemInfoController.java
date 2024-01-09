@@ -63,6 +63,14 @@ public class ItemInfoController {
 		
 	}
 	
+	// 리스트 타이틀 조회(페이징없이 전체 조회)
+		@GetMapping("/listAll")
+		public List<ItemInfoDto> itemInfoTitleAll() throws Exception {					
+			List<ItemInfoDto> response = service.getItemTitleAll();			
+			return response;
+			
+		}
+	
 	// 상세정보 조회
 	// PathVariable = url로부터 파라미터를 받음
 	@GetMapping("/detail")

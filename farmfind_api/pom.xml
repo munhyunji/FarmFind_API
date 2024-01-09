@@ -64,6 +64,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		<!-- 기타 의존성 -->
+	    <dependency>
+	        <groupId>software.amazon.awssdk</groupId>
+	        <artifactId>s3</artifactId>
+	        <version>2.20.56</version> 
+	    </dependency>
+		<dependency>
+       	 <groupId>software.amazon.awssdk</groupId>
+        		<artifactId>aws-sdk-java</artifactId>
+        	<version>2.22.8</version> <!-- 원하는 버전으로 변경 -->
+    	</dependency>
 	</dependencies>
 
 	<build>

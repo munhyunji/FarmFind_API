@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.study.farmfind.model.ItemInfoDto;
 import com.study.farmfind.model.Paging;
+import com.study.farmfind.model.PagingResponse;
 
 @Mapper
 public interface ItemInfoMapper {
@@ -16,5 +17,7 @@ public interface ItemInfoMapper {
 	List<ItemInfoDto> getItemTitle(Paging page) throws Exception;
 	//아이템 상세정보 조회
 	ItemInfoDto getItemInfo(int item_no) throws Exception;
+	//아이템 전체조회
+	List<ItemInfoDto> getItemTitleAll();
 	
 }
