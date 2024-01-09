@@ -47,6 +47,11 @@ public class ItemInfoService {
 		return mapper.getItemInfo(item_no);
 	}
 	
+	//아이템 전체조회 
+	public List<ItemInfoDto> getItemTitleAll() {
+		return mapper.getItemTitleAll();
+	}
+	
 	
 	
 	

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="com.study.farmfind.mapper.S3Mapper">
+
+	<!-- url-->
+	<update id="setImgUrl" parameterType="String">
+		UPDATE 
+			item_info
+		SET
+			<choose>
+				<when test= "imgId == 'Aftsubmit' ">
+					ITEM_IMG_AFT = #{imgUrl}
+				</when>
+				<when test="imgId == 'Nigsubmit' ">
+					ITEM_IMG_NIG = #{imgUrl}
+				</when>
+			</choose>
+			
+		WHERE 
+			ITEM_NO = #{item_no}	
+	</update>
+
+</mapper>

@@ -38,7 +38,8 @@
 			ITEM_NO,
 			ITEM_NM, 
 			ITEM_IMG_AFT,
-			ITEM_GET_FROM_DT
+			ITEM_GET_FROM_DT,
+			RGST_DT
 		FROM 
 			item_info 
 		<where> 
@@ -54,12 +55,29 @@
 			</if>
 			<if test="getFrom != null and !getFrom.equals('')">
 				AND ITEM_GET_FROM_CD = #{getFrom}
-			</if>
-				
-		</where>		
+			</if>			
+		</where>
+			ORDER BY ITEM_GET_FROM_DT DESC			
 			LIMIT #{pagination.limitStart}, #{recordSize};	
-			
-		
+				
+	</select>
+	
+	<select id="getItemTitleAll" resultType="com.study.farmfind.model.ItemInfoDto">
+		SELECT
+			ITEM_NO,
+			ITEM_MAIN_CATEGORY_CD,
+			ITEM_MID_CATEGORY_CD,
+			ITEM_NM,
+			ITEM_SIZE,
+			ITEM_DYE_YN,
+			ITEM_GET_FROM_CD,
+			ITEM_GET_FROM_NM,
+			ITEM_GET_FROM_DT,
+			ITEM_IMG_AFT,
+			ITEM_IMG_NIG,
+			ITEM_DSCPTION
+		FROM 
+			item_info
 	</select>
 	
 	<!-- 아이템정보 조회 param = itemNo -->

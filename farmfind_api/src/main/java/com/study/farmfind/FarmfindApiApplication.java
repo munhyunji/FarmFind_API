@@ -25,7 +25,18 @@ public class FarmfindApiApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:8070", "http://3.35.93.254:8080");
+                registry.addMapping("/**").allowedOrigins(
+                		"http://localhost:8070",
+                		"http://3.35.93.254:8080",
+                		"https://3.35.93.254:8080",
+                		"http://farmfind.store:8080",
+                		"https://farmfind.store:8080",
+                		"http://3.35.93.254",
+                		"https://3.35.93.254",
+                		"http://farmfind.store",
+                		"https://farmfind.store"
+               		
+                		);
             }
         };
     }
