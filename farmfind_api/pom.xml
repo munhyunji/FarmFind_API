@@ -73,8 +73,26 @@
 		<dependency>
        	 <groupId>software.amazon.awssdk</groupId>
         		<artifactId>aws-sdk-java</artifactId>
-        	<version>2.22.8</version> <!-- 원하는 버전으로 변경 -->
+        	<version>2.22.8</version> 
     	</dependency>
+    	 <!-- Spring Boot Starter Web -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-web</artifactId>
+	    </dependency>
+	
+	    <!-- Spring Security Starter -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-security</artifactId>
+	    </dependency>
+	    <!-- 쿼리출력  -->
+	    <dependency>
+			<groupId>org.lazyluke</groupId>
+			<artifactId>log4jdbc-remix</artifactId>
+			<version>0.2.7</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
