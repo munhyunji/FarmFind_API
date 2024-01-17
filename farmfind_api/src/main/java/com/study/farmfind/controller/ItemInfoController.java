@@ -46,7 +46,8 @@ public class ItemInfoController {
 			@RequestParam(value="category", defaultValue="") String category,
 			@RequestParam(value="dyeYN", defaultValue="") String dyeYN,
 			@RequestParam(value="getFrom", defaultValue="") String getFrom,
-			@RequestParam(value="itemSize", defaultValue="") String itemSize
+			@RequestParam(value="itemSize", defaultValue="") String itemSize,
+			@RequestParam(value="itemEtc", defaultValue="") String itemEtc
 			) throws Exception {		
 		
 		Paging paging = new Paging();
@@ -56,6 +57,7 @@ public class ItemInfoController {
 		paging.setDyeYN(dyeYN);
 		paging.setGetFrom(getFrom);
 		paging.setItemSize(itemSize);
+		paging.setItemEtc(itemEtc);
 		
 		PagingResponse<ItemInfoDto> response = service.getItemTitle(paging);
 		

@@ -15,6 +15,7 @@ public class Paging {
 	    private String dyeYN;    // 염색 여부
 	    private String getFrom;    // 획득처
 	    private String itemSize;    // 아이템 사이즈
+	    private String itemEtc;    // 상호작용
 	    private Pagination pagination; // 페이지네이션 정보
 
 	    public Paging() {
