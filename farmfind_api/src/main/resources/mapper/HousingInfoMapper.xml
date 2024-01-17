@@ -69,7 +69,8 @@
 			HOUSING_GET_FROM_DT,
 			HOUSING_IMG_AFT,
 			HOUSING_IMG_NIG,
-			HOUSING_DSCPTION
+			HOUSING_DSCPTION,
+			DATE_FORMAT(RGST_DT, "%Y년 %m월 %d일") as RGST_DT
 		FROM
 			housing_info
 		WHERE HOUSING_NO = #{housingNo};			

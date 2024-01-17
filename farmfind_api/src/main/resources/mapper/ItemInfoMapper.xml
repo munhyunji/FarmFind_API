@@ -7,28 +7,42 @@
 
 	<!-- 개수조회 -->
 	<select id="itemInfoCount" parameterType="com.study.farmfind.model.Paging" resultType="int">
-		SELECT 
-			COUNT(*) 
-		FROM 
-			item_info
-		<where>
-			1=1
-			<if test="keyword != null and !keyword.equals('')">
-				AND ITEM_NM LIKE concat('%', #{keyword}, '%')
-			</if>
-			<if test="category != null and !category.equals('')">
-				AND ITEM_MID_CATEGORY_CD = #{category}
-			</if>
-			<if test="dyeYN != null and !dyeYN.equals('')">
-				AND ITEM_DYE_YN = #{dyeYN}
-			</if>
-			<if test="getFrom != null and !getFrom.equals('')">
-				AND ITEM_GET_FROM_CD = #{getFrom}
-			</if>
-
-		</where>
-			;	
+	    SELECT 
+	        COUNT(*) 
+	    FROM 
+	        item_info
+	    WHERE
+	        1=1
+	        <if test="keyword != null and !keyword.equals('')">
+	            AND ITEM_NM LIKE concat('%', #{keyword}, '%')
+	        </if>
+	        <if test="category != null and !category.equals('')">
+	            AND ITEM_MID_CATEGORY_CD = #{category}
+	        </if>
+	        <if test="dyeYN != null and !dyeYN.equals('')">
+	            AND ITEM_DYE_YN = #{dyeYN}
+	        </if>
+	        <if test="getFrom != null and !getFrom.equals('')">
+	            AND ITEM_GET_FROM_CD = #{getFrom}
+	        </if>
+	        <choose>
+	            <when test="itemSize != null and !itemSize.equals('')">
+	                AND ITEM_SIZE = #{itemSize}
+	            </when>
+	            <otherwise>
+	                AND ITEM_SIZE != #{itemSize}
+	            </otherwise>
+	        </choose>
+	        <choose>
+	            <when test="itemEtc != null and !itemEtc.equals('')">
+	                AND ITEM_ETC != '' 
+	            </when>
+	            <otherwise>
+	                <!-- 필요한 경우 추가 로직 작성 -->
+	            </otherwise>
+	        </choose>
 	</select>
+
 	
 	<!-- 아이템이름 조회 -->
 	<!-- Paging 객체에 있는 변수를 사용하기위해 parameterType 추가 -->
@@ -39,10 +53,10 @@
 			ITEM_NM, 
 			ITEM_IMG_AFT,
 			ITEM_GET_FROM_DT,
-			RGST_DT
+			DATE_FORMAT(RGST_DT, "%Y년 %m월 %d일") as RGST_DT
 		FROM 
 			item_info 
-		<where> 
+		WHERE
 			1=1
 			<if test="keyword != null and !keyword.equals('')">
             	AND ITEM_NM like concat('%', #{keyword}, '%')
@@ -55,9 +69,24 @@
 			</if>
 			<if test="getFrom != null and !getFrom.equals('')">
 				AND ITEM_GET_FROM_CD = #{getFrom}
-			</if>			
-		</where>
-			ORDER BY ITEM_GET_FROM_DT DESC			
+			</if>
+			<choose>
+				<when test="itemSize != null and !itemSize.equals('')">
+					AND ITEM_SIZE = #{itemSize}
+				</when>
+				<otherwise>
+					AND ITEM_SIZE != #{itemSize}
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="itemEtc != null and !itemEtc.equals('')">
+	                AND ITEM_ETC != '' 
+	            </when>
+				<otherwise>
+				</otherwise>
+			</choose>			
+		
+			ORDER BY ITEM_GET_FROM_DT DESC, ITEM_NO ASC			
 			LIMIT #{pagination.limitStart}, #{recordSize};	
 				
 	</select>
@@ -75,6 +104,7 @@
 			ITEM_GET_FROM_DT,
 			ITEM_IMG_AFT,
 			ITEM_IMG_NIG,
+			ITEM_ETC,
 			ITEM_DSCPTION
 		FROM 
 			item_info
@@ -94,7 +124,9 @@
 			ITEM_GET_FROM_DT,
 			ITEM_IMG_AFT,
 			ITEM_IMG_NIG,
-			ITEM_DSCPTION
+			ITEM_ETC,
+			ITEM_DSCPTION,
+			DATE_FORMAT(RGST_DT, "%Y년 %m월 %d일") as RGST_DT
 		FROM
 			item_info
 		WHERE ITEM_NO = #{itemNo};			
