@@ -26,7 +26,7 @@ public class FarmfindApiApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedOrigins(
-                		"http://localhost:8070",
+                		"http://localhost:8090",
                 		"http://3.35.93.254:8080",
                 		"https://3.35.93.254:8080",
                 		"http://farmfind.store:8080",
