@@ -27,15 +27,16 @@ public class FarmfindApiApplication {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedOrigins(
                 		"http://localhost:8090",
-                		"http://3.35.93.254:8080",
-                		"https://3.35.93.254:8080",
+                		/*"http://3.35.93.254:8080",
+                		"https://3.35.93.254:8080",*/
                 		"http://farmfind.store:8080",
                 		"https://farmfind.store:8080",
-                		"http://3.35.93.254",
-                		"https://3.35.93.254",
+                		/*"http://3.35.93.254",
+                		"https://3.35.93.254",*/
                 		"http://farmfind.store",
-                		"https://farmfind.store"
-               		
+                		"https://farmfind.store",
+               			"http://43.200.225.172:8090",
+						"https://43.200.225.172:8090"
                 		);
             }
         };
